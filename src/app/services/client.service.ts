@@ -14,7 +14,7 @@ export class ClientService {
   client: Observable<Client>;
 
   constructor(private db: AngularFirestore) {
-    this.clientsCollection = this.db.collection('clients', ref => ref.orderBy('lastName', 'asc'));
+    this.clientsCollection = this.db.collection('clients', ref => ref.orderBy('firstName', 'asc'));
    }
 
    getClients(): Observable<Client[]> {
@@ -27,5 +27,9 @@ export class ClientService {
        });
      }));
      return this.clients;
+   }
+
+   addClient(client: Client): void{
+      this.clientsCollection.add(client);
    }
 }
